@@ -1,1 +1,1 @@
-# nas-visualization-card
+# [HACS] NAS Visualization Card
