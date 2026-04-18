@@ -1,0 +1,8 @@
+{
+  "name": "NAS Drive Visualization Card",
+  "content": "dist/nas-drive-card.js",
+  "type": "plugin",
+  "homeassistant": "2021.12.0",
+  "render_readme": true,
+  "zip_release": false
+}

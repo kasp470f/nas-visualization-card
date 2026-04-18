@@ -1,0 +1,31 @@
+{
+  "name": "nas-visualization-card",
+  "version": "0.1.0",
+  "description": "Home Assistant Lovelace card: NAS Drive Visualization (TrueNAS-like)",
+  "main": "dist/nas-drive-card.js",
+  "scripts": {
+    "build": "rollup -c",
+    "clean": "rimraf dist",
+    "prepare": "npm run build",
+    "dev": "npm run build && copy dist/nas-drive-card.js \\\\homeassistant\\config\\www",
+    "format": "prettier --write \"src/**/*.{ts,js,css,json,md}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,js,css,json,md}\"",
+    "lint": "eslint \"src/**/*.{ts,js}\" --ext .ts,.js",
+    "lint:fix": "eslint \"src/**/*.{ts,js}\" --ext .ts,.js --fix"
+  },
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^11.0.0",
+    "rollup": "^2.79.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "typescript": "^5.0.0",
+    "tslib": "^2.5.0",
+    "rimraf": "^5.0.0",
+    "rollup-plugin-string": "^3.0.0",
+    "eslint": "^8.50.0",
+    "prettier": "^2.8.8",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "@typescript-eslint/parser": "^6.2.0",
+    "@typescript-eslint/eslint-plugin": "^6.2.0"
+  }
+}
