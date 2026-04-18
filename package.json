@@ -1,6 +1,6 @@
 {
   "name": "nas-visualization-card",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Home Assistant Lovelace card: NAS Drive Visualization (TrueNAS-like)",
   "main": "dist/nas-drive-card.js",
   "scripts": {
