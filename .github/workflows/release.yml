@@ -30,11 +30,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Configure git user
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
       - name: Bump version
         env:
           INPUT_VERSION: ${{ github.event.inputs.version }}
@@ -48,9 +43,9 @@ jobs:
           fi
 
       - name: Push version commit and tags
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git push origin HEAD
           git push origin --tags
 
