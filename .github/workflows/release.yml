@@ -24,10 +24,14 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Prepare release asset
+        run: |
+          cp dist/nas-drive-card.js nas-drive-card.js
+
       - name: Create GitHub release and upload asset
         uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref_name }}
-          files: dist/nas-drive-card.js
+          files: nas-drive-card.js
