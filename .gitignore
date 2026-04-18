@@ -137,3 +137,7 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+## IGNORE PLANS
+PRD.md
+IMPLEMENTATION_PLAN.md
