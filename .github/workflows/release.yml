@@ -25,7 +25,9 @@ jobs:
         run: npm run build
 
       - name: Create GitHub release and upload asset
-        uses: ncipollo/release-action@v1
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag: ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
           files: dist/nas-drive-card.js
