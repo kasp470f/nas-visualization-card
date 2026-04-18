@@ -30,8 +30,6 @@ jobs:
 
       - name: Create GitHub release and upload asset
         uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref_name }}
           files: nas-drive-card.js
