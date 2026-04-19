@@ -20,3 +20,5 @@ drives:
 ```
 
 This project is intended to be published to HACS. See `hacs.json` for metadata.
+
+![Example of the card in use](.github/images/version0.1.png)
