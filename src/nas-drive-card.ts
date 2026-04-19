@@ -1,23 +1,9 @@
 import styles from './styles.css';
+import { CardConfig, DriveConfig } from './types/config.type';
+import { HomeAssistant } from './types/home-assistant.type';
 
 const DEFAULT_ROWS = 1;
 const DEFAULT_COLUMNS = 4;
-
-type DriveConfig = {
-	entity: string;
-	index?: number;
-};
-
-interface CardConfig {
-	rows?: number;
-	columns?: number;
-	orientation?: 'horizontal' | 'vertical';
-	drives?: DriveConfig[];
-}
-
-interface HomeAssistant {
-	states?: Record<string, { state: string }>;
-}
 
 class NasDriveCard extends HTMLElement {
 	private _config: CardConfig = {};
