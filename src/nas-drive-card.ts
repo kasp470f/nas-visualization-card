@@ -18,9 +18,11 @@ class NasDriveCard extends HTMLElement {
 		const styleEl = document.createElement('style');
 		styleEl.textContent = styles;
 		this.root.appendChild(styleEl);
+		const card = document.createElement('ha-card');
 		const container = document.createElement('div');
-		container.className = 'card';
-		this.root.appendChild(container);
+		container.className = 'content';
+		card.appendChild(container);
+		this.root.appendChild(card);
 	}
 
 	setConfig(config: CardConfig) {
@@ -43,7 +45,7 @@ class NasDriveCard extends HTMLElement {
 	}
 
 	private render() {
-		const container = this.root.querySelector('.card') as HTMLElement;
+		const container = this.root.querySelector('.content') as HTMLElement;
 		if (!container) return;
 		container.innerHTML = '';
 
