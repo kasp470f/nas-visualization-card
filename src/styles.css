@@ -18,6 +18,12 @@
 .grid {
 	display: grid;
 	gap: 8px;
+.grid.horizontal .bay {
+	min-height: 32px;
+}
+
+.grid.vertical .bay {
+	min-height: 48px;
 }
 
 .bay {
