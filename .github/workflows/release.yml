@@ -1,22 +1,51 @@
 name: Build and publish release asset
 
 on:
-  push:
-    tags:
-      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version_bump:
+        description: Type of release to create (major, minor, patch)
+        required: true
+        default: patch
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+
+permissions:
+  contents: write
 
 jobs:
-  build-and-release:
+  release:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: "18"
+          cache: npm
+
+      - name: Bump version
+        id: version
+        run: |
+          set -euo pipefail
+
+          npm version "${{ github.event.inputs.version_bump }}" --no-git-tag-version
+
+          version="$(node -p "require('./package.json').version")"
+
+          {
+            echo "version=$version"
+            echo "tag_name=v$version"
+            echo "release_name=Release v. $version"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Install dependencies
         run: npm ci
@@ -24,12 +53,37 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Prepare release asset
+      - name: Commit version bump
         run: |
-          cp dist/nas-drive-card.js nas-drive-card.js
+          set -euo pipefail
 
-      - name: Create GitHub release and upload asset
-        uses: softprops/action-gh-release@v1
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json
+          git commit -m "chore: release ${{ steps.version.outputs.version }}"
+
+      - name: Create and push tag
+        run: |
+          set -euo pipefail
+
+          git tag "${{ steps.version.outputs.tag_name }}"
+          git push origin "HEAD:${{ github.ref_name }}"
+          git push origin "${{ steps.version.outputs.tag_name }}"
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref_name }}
-          files: nas-drive-card.js
+          tag_name: ${{ steps.version.outputs.tag_name }}
+          name: ${{ steps.version.outputs.release_name }}
+          generate_release_notes: true
+          files: dist/nas-drive-card.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+
+
+
+
+
+
