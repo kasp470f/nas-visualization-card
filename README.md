@@ -2,6 +2,11 @@
 
 Home Assistant Lovelace custom card to visualize NAS drives in a TrueNAS-inspired grid.
 
+Installation with HACS:
+
+1. In HACS, add this repository as a custom repository with category `Dashboard`.
+2. Download `NAS Drive Visualization Card` from HACS.
+
 Installation (manual):
 
 1. Build the project: `npm install` then `npm run build`.

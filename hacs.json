@@ -1,6 +1,5 @@
 {
   "name": "NAS Drive Visualization Card",
   "render_readme": true,
-  "zip_release": true,
   "filename": "nas-drive-card.js"
 }
